@@ -99,7 +99,7 @@
         <zxing.version>3.5.3</zxing.version>
         <lark-oapi.version>2.7.1</lark-oapi.version>
         <guava.version>33.6.0-jre</guava.version>
-        <commons-lang3.version>3.17.0</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-io.version>2.18.0</commons-io.version>
         <commons-collections4.version>4.5.0-M3</commons-collections4.version>
         <easyexcel.version>4.0.3</easyexcel.version>
