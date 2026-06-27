@@ -106,7 +106,7 @@
         <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
 
         <!-- OSS -->
-        <minio.version>8.5.14</minio.version>
+        <minio.version>8.6.0</minio.version>
         <aws-s3.version>2.46.17</aws-s3.version>
 
         <!-- Logging -->
