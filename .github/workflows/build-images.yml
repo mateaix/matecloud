@@ -36,7 +36,7 @@ jobs:
         run: mvn clean package -B -q -pl ${{ matrix.service.path }} -am -DskipTests
 
       - name: Login to GHCR
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
