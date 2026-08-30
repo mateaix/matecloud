@@ -28,7 +28,7 @@ matecloud/
 │   ├── mate-gray-starter/        # 灰度发布（Dubbo + Gateway）
 │   ├── mate-flow-starter/        # 轻量工作流引擎
 │   ├── mate-rule-starter/        # Aviator 规则引擎
-│   ├── mate-ai-starter/          # Spring AI 2.0 + @Tool + MCP
+│   ├── mate-ai-starter/          # Spring AI 2.0.1 + @Tool + MCP
 │   └── mate-test-starter/        # Testcontainers + @MateTest
 │
 ├── mate-gateway/                 # API 网关（WebFlux, 9010）

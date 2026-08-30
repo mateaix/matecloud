@@ -299,52 +299,43 @@ spring:
       api-key: ${ANTHROPIC_API_KEY:}
       base-url: ${ANTHROPIC_BASE_URL:https://api.anthropic.com}
       chat:
-        options:
-          model: ${ANTHROPIC_MODEL:claude-sonnet-4-6}
-          max-tokens: 4096
+        model: ${ANTHROPIC_MODEL:claude-sonnet-4-6}
+        max-tokens: 4096
     # ---- OpenAI-compatible (also: KIMI/Moonshot, DashScope, ...) ----
     # KIMI:  OPENAI_BASE_URL=https://api.moonshot.cn  OPENAI_MODEL=moonshot-v1-32k
     openai:
       api-key: ${OPENAI_API_KEY:}
       base-url: ${OPENAI_BASE_URL:https://api.openai.com}
       chat:
-        options:
-          model: ${OPENAI_MODEL:gpt-5.5}
-          max-tokens: 4096
-    # ---- 智谱 GLM ----
-    zhipuai:
-      api-key: ${ZHIPUAI_API_KEY:}
-      base-url: ${ZHIPUAI_BASE_URL:https://open.bigmodel.cn/api/paas/v4}
-      chat:
-        options:
-          model: ${ZHIPUAI_MODEL:glm-5}
-          max-tokens: 4096
-    # ---- Minimax ----
-    minimax:
-      api-key: ${MINIMAX_API_KEY:}
-      base-url: ${MINIMAX_BASE_URL:https://api.minimax.chat}
-      chat:
-        options:
-          model: ${MINIMAX_MODEL:abab6.5s-chat}
-          max-tokens: 4096
+        model: ${OPENAI_MODEL:gpt-5.5}
+        max-tokens: 4096
+    # Spring AI 2.x 不再提供 ZhipuAI/MiniMax 原生 provider。
+    # 智谱 GLM 通过 OpenAI 兼容端点接入: MATE_AI_PROVIDER=openai,
+    # OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4, OPENAI_MODEL=glm-5。
+    # MiniMax: MATE_AI_PROVIDER=anthropic,
+    # ANTHROPIC_BASE_URL=https://api.minimax.io/anthropic, ANTHROPIC_MODEL=MiniMax-M2.7。
     # ---- DeepSeek ----
     deepseek:
       api-key: ${DEEPSEEK_API_KEY:}
       base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
       chat:
-        options:
-          model: ${DEEPSEEK_MODEL:deepseek-v4}
-          max-tokens: 4096
+        model: ${DEEPSEEK_MODEL:deepseek-v4}
+        max-tokens: 4096
     # ---- Ollama (self-hosted) ----
     ollama:
       base-url: ${OLLAMA_BASE_URL:http://127.0.0.1:11434}
       chat:
-        options:
-          model: ${OLLAMA_MODEL:qwen2.5:latest}
+        model: ${OLLAMA_MODEL:qwen2.5:latest}
+    # Only explicitly attached tools may execute. Keep the 2.0.1 security default.
+    tools:
+      resolution:
+        fallback:
+          enabled: false
     # ---- MCP server auto-bridge ----
     mcp:
       server:
         enabled: ${MATE_MCP_SERVER_ENABLED:false}
+        tool-callback-converter: true
         name: ${spring.application.name}
         version: 1.0.0
         type: SYNC

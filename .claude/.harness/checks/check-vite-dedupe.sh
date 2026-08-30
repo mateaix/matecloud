@@ -24,7 +24,7 @@ for cfg in "${cfgs[@]}"; do
       bad=1
     fi
   else
-    h_ok "$rel（无 element-plus + @matecloud/ui，免检）"
+    h_ok "${rel}（无 element-plus + @matecloud/ui，免检）"
   fi
 done
 

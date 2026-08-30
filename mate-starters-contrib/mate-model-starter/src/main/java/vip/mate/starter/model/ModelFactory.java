@@ -49,7 +49,7 @@ public class ModelFactory {
      */
     public ChatModel chatModel(ModelEndpoint ep) {
         ModelEndpoint e = require(ep, "LLM");
-        // Spring AI 2.0: 凭据落在 Options, 由 OpenAiSetup 经官方 com.openai SDK 构造客户端
+        // Spring AI 2.x: 凭据落在 Options, 由 OpenAiSetup 经官方 com.openai SDK 构造客户端
         OpenAiChatOptions.Builder options = OpenAiChatOptions.builder();
         options.model(e.model());
         options.apiKey(apiKey(e));
@@ -73,7 +73,10 @@ public class ModelFactory {
         options.apiKey(apiKey(e));
         options.baseUrl(baseUrl(e));
 
-        return new OpenAiEmbeddingModel(MetadataMode.EMBED, options.build());
+        return OpenAiEmbeddingModel.builder()
+                .metadataMode(MetadataMode.EMBED)
+                .options(options.build())
+                .build();
     }
 
     /**

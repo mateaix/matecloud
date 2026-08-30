@@ -25,7 +25,8 @@ import java.util.List;
  * Top-level mate-ai-starter toggles. The actual model / API-key settings are
  * provided by Spring AI's own properties ({@code spring.ai.<provider>.*}).
  * Pick the active provider via {@code spring.ai.model.chat=<anthropic|openai|
- * zhipuai|minimax|deepseek|ollama>}.
+ * deepseek|ollama>}. ZhipuAI uses the OpenAI-compatible endpoint; MiniMax uses
+ * the Anthropic-compatible endpoint.
  *
  * @author mateaix
  */

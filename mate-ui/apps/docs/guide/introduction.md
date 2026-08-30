@@ -5,10 +5,10 @@ MateCloud 是一套基于 **DDD（领域驱动设计）** 的微服务脚手架�
 | 技术 | 版本 | 用途 |
 |------|------|------|
 | Java | 21 | 虚拟线程、模式匹配 |
-| Spring Boot | 4.0.7 | 基础框架 |
+| Spring Boot | 4.0.8 | 基础框架 |
 | Spring Cloud | 2025.1.2 | 云原生抽象 |
 | Spring Cloud Alibaba | 2025.1.0.0 | Nacos、Sentinel、Seata |
-| Spring AI | 2.0.0-M4 | LLM 客户端、@Tool、MCP |
+| Spring AI | 2.0.1 | LLM 客户端、@Tool、MCP |
 | Dubbo | 3.3.6 | RPC 框架 |
 | MyBatis Plus | 3.5.16 | ORM |
 | Sa-Token | 1.45.0 | 认证鉴权 |

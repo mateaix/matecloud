@@ -39,8 +39,10 @@ AI 会自动：
 export ANTHROPIC_API_KEY=sk-ant-xxx
 
 # 智谱 GLM
-export MATE_AI_PROVIDER=zhipuai
-export ZHIPUAI_API_KEY=...
+export MATE_AI_PROVIDER=openai
+export OPENAI_API_KEY=...
+export OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+export OPENAI_MODEL=glm-5
 
 # DeepSeek
 export MATE_AI_PROVIDER=deepseek

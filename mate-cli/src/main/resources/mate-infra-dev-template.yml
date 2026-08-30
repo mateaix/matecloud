@@ -242,12 +242,11 @@ spring:
       api-key: ${ANTHROPIC_API_KEY:}
     openai:
       api-key: ${OPENAI_API_KEY:}
-    zhipuai:
-      api-key: ${ZHIPUAI_API_KEY:}
-    minimax:
-      api-key: ${MINIMAX_API_KEY:}
     deepseek:
       api-key: ${DEEPSEEK_API_KEY:}
+
+# ZhipuAI: select openai and set OPENAI_BASE_URL/OPENAI_MODEL.
+# MiniMax: select anthropic and set ANTHROPIC_BASE_URL/ANTHROPIC_MODEL.
 
 # ============================================================
 # 12. Logging levels (per-env)

@@ -30,8 +30,8 @@
         </dependency>
 
         <!-- ============================================================ -->
-        <!-- LLM provider starters. Anthropic is the default; the rest    -->
-        <!-- are optional so downstream services pick and choose.          -->
+        <!-- LLM provider starters. Anthropic is the default; all listed -->
+        <!-- providers are available for runtime configuration switching. -->
         <!-- Select the active one via spring.ai.model.chat=<provider>.    -->
         <!-- ============================================================ -->
 
@@ -45,7 +45,6 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-model-openai</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- Spring AI 2.0 移除 zhipuai/minimax 原生模块: GLM/MiniMax 经 OpenAI 兼容端点 (base-url override) -->
@@ -54,21 +53,18 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-model-deepseek</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- Ollama (self-hosted) -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-model-ollama</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- MCP server auto-bridge: every @Tool becomes MCP-accessible at /mcp -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- Optional MCP client: consume external MCP servers as additional tools -->
@@ -91,6 +87,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

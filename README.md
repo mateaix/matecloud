@@ -15,9 +15,9 @@
 
 ## 系统说明
 
-- **MateCloud** 是 **AI 原生 · 云原生**的 DDD 微服务脚手架，基于 **Spring Boot 4 + Spring Cloud 2025 + Dubbo 3 + Spring AI 2.0**，单体（`mate-monolith`）与微服务**双形态一键切换**。
+- **MateCloud** 是 **AI 原生 · 云原生**的 DDD 微服务脚手架，基于 **Spring Boot 4 + Spring Cloud 2025 + Dubbo 3 + Spring AI 2.0.1**，单体（`mate-monolith`）与微服务**双形态一键切换**。
 - 开源版含 **网关 / 认证 / 系统管理 / 通知** 四个核心服务 + **27 个即插即用 Starter（18 核心 + 9 高级）**，完整展示 DDD 四层 + CQRS 读写分离。
-- **AI 原生**：Spring AI 2.0 + `@Tool` 自动发现 + 会话记忆 + 流式对话，支持 6 个 LLM 提供商（Anthropic / OpenAI / 智谱 / Minimax / DeepSeek / Ollama）。
+- **AI 原生**：Spring AI 2.0.1 + `@Tool` 自动发现 + 会话记忆 + 流式对话，内置 Anthropic / OpenAI / DeepSeek / Ollama，并通过兼容端点支持智谱与 MiniMax。
 - **MCP 原生工程闭环（Loop Engineering）**：`mate --mcp` 把 `mate-cli` 与业务 `@Tool` 暴露为 MCP 工具，让 AI Agent 在「观察 → 推理 → 执行 → 反馈」闭环中操作集群——查服务、调 RPC、生成代码、迁移数据库。
 - 认证基于 **Sa-Token**（密码 / 短信 / 验证码登录）；**Docker Compose** 一键编排，`mate-cli` 提供脚手架、Nacos 配置、服务发现、健康检查与代码生成。
 
@@ -111,10 +111,10 @@ pnpm dev                       # → http://localhost:3000
 | 依赖 | 版本 |
 | --- | --- |
 | Java | 21 |
-| Spring Boot | 4.0.7 |
+| Spring Boot | 4.0.8 |
 | Spring Cloud | 2025.1.2 |
 | Spring Cloud Alibaba | 2025.1.0.0 |
-| Spring AI | 2.0.0 |
+| Spring AI | 2.0.1 |
 | Dubbo | 3.3.6 |
 | MyBatis Plus | 3.5.16 |
 | Sa-Token | 1.45.0 |
@@ -132,7 +132,7 @@ pnpm dev                       # → http://localhost:3000
 | **微服务 · 单体双形态** | Spring Cloud + Dubbo 3 RPC + Nacos；`mate-monolith` 单体一键切换；灰度 · 限流 · Seata |
 | **27 个 Starter** | 18 核心 + 9 高级：持久化、缓存、锁、MQ、任务、分片、租户、安全、可观测、AI、测试…… |
 | **多租户 SaaS** | 行级隔离 / Schema 隔离 / 独立数据源三种模式 |
-| **AI 原生集成** | Spring AI 2.0 + @Tool 自动发现 + 会话记忆 + 流式对话 + 6 个 LLM 提供商 |
+| **AI 原生集成** | Spring AI 2.0.1 + @Tool 自动发现 + 会话记忆 + 流式对话 + 4 个原生 Provider 与兼容端点 |
 | **MCP 原生工程闭环** | `mate --mcp` + 业务 @Tool 暴露为 MCP 工具，AI Agent 闭环操作集群（Loop Engineering）|
 | **分布式锁** | `@DistributedLock` 注解，Redisson 实现 |
 | **接口签名** | `@ApiSign` 防篡改，HMAC-SHA256 签名验证 |
@@ -177,7 +177,7 @@ matecloud
 │   ├── mate-gray-starter           -- 灰度发布
 │   ├── mate-flow-starter           -- 轻量工作流引擎
 │   ├── mate-rule-starter           -- Aviator 规则引擎
-│   ├── mate-ai-starter             -- Spring AI 2.0 + @Tool + MCP
+│   ├── mate-ai-starter             -- Spring AI 2.0.1 + @Tool + MCP
 │   └── mate-test-starter           -- Testcontainers + @MateTest
 ├── mate-gateway                    -- API 网关 [9010]
 ├── mate-auth                       -- 认证服务 [9020]
@@ -197,10 +197,10 @@ matecloud
 
 ## AI 集成
 
-`mate-ai-starter` 封装 Spring AI 2.0，提供三大能力：
+`mate-ai-starter` 封装 Spring AI 2.0.1，提供三大能力：
 
 1. **`@Tool` 自动发现** — 任何 Spring Bean 方法标注 `@Tool` 即可被 LLM 调用
-2. **多提供商支持** — 一个环境变量切换 Anthropic / OpenAI / 智谱 / Minimax / DeepSeek / Ollama
+2. **多提供商支持** — 一个环境变量切换 Anthropic / OpenAI / DeepSeek / Ollama；智谱与 MiniMax 使用兼容端点
 3. **MCP Server 桥接** — Claude Code / Claude Desktop 可以直接调用集群中的 `@Tool` 方法
 
 ```java

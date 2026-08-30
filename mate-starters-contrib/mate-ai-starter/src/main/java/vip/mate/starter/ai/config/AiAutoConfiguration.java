@@ -38,7 +38,7 @@ import vip.mate.starter.ai.tool.AiToolInvoker;
 import vip.mate.starter.ai.tool.AiToolRegistry;
 
 /**
- * Auto-configuration for mate-ai-starter (Spring AI 2.0 flavor).
+ * Auto-configuration for mate-ai-starter (Spring AI 2.0.1 flavor).
  * <p>
  * Spring AI's own auto-configuration provides a {@link ChatClient.Builder}
  * when {@code spring-ai-starter-model-anthropic} is on the classpath. We add:

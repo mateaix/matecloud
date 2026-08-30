@@ -68,7 +68,7 @@ public class AiChatService {
         this.chatClient = chatClientBuilder
                 .defaultSystem(properties.getSystemPrompt())
                 .defaultAdvisors(advisors.toArray(new Advisor[0]))
-                .defaultToolCallbacks(toolRegistry)
+                .defaultTools(toolRegistry)
                 .build();
     }
 

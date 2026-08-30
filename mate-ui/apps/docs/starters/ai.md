@@ -1,6 +1,6 @@
 # mate-ai-starter
 
-AI 集成 Starter，基于 Spring AI 2.0，详见 [AI 集成](/ai/overview)。
+AI 集成 Starter，基于 Spring AI 2.0.1，详见 [AI 集成](/ai/overview)。
 
 ## 快速启用
 

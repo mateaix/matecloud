@@ -99,7 +99,7 @@ make up
 java -jar mate-cli/target/mate-cli.jar status
 
 # 5. Chat with the cluster
-export ANTHROPIC_API_KEY=sk-ant-xxx    # or ZHIPUAI_API_KEY / DEEPSEEK_API_KEY
+export ANTHROPIC_API_KEY=sk-ant-xxx    # or OPENAI_API_KEY / DEEPSEEK_API_KEY
 java -jar mate-cli/target/mate-cli.jar ai chat "今天注册了多少用户?"
 ```
 

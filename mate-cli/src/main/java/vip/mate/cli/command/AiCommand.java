@@ -243,15 +243,15 @@ public class AiCommand implements Runnable {
             System.out.println("Supported providers (set MATE_AI_PROVIDER or spring.ai.model.chat):");
             System.out.println();
             System.out.println("  anthropic   Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5      (default)");
-            System.out.println("  openai      GPT-5.5 / 5.5-Pro / 5.3-Codex  [also: KIMI/Moonshot via OPENAI_BASE_URL override]");
-            System.out.println("  zhipuai     GLM-5 / GLM-4.7");
-            System.out.println("  minimax     abab6.5s-chat");
+            System.out.println("  openai      GPT-5.5 / 5.5-Pro / 5.3-Codex  [also: KIMI and Zhipu GLM via OPENAI_BASE_URL]");
             System.out.println("  deepseek    deepseek-v4 / deepseek-v4-flash / deepseek-r1");
             System.out.println("  ollama      Self-hosted (qwen2.5, llama3.x, etc.)");
             System.out.println();
-            System.out.println("Each provider's api-key comes from the matching env var:");
-            System.out.println("  ANTHROPIC_API_KEY / OPENAI_API_KEY / ZHIPUAI_API_KEY / MINIMAX_API_KEY /");
-            System.out.println("  DEEPSEEK_API_KEY");
+            System.out.println("Compatibility endpoints:");
+            System.out.println("  Zhipu GLM   MATE_AI_PROVIDER=openai, OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4");
+            System.out.println("  MiniMax     MATE_AI_PROVIDER=anthropic, ANTHROPIC_BASE_URL=https://api.minimax.io/anthropic");
+            System.out.println();
+            System.out.println("API keys: ANTHROPIC_API_KEY / OPENAI_API_KEY / DEEPSEEK_API_KEY");
         }
     }
 

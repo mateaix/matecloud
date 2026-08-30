@@ -48,7 +48,7 @@ MateCloud 提供 **21 个 Starter**（13 标准 + 8 高级），覆盖微服务�
 | mate-gray-starter | 灰度发布（Dubbo + Gateway 双维度） |
 | mate-flow-starter | 轻量工作流引擎 |
 | mate-rule-starter | Aviator 规则引擎 |
-| [mate-ai-starter](/starters/ai) | Spring AI 2.0 + `@Tool` + MCP |
+| [mate-ai-starter](/starters/ai) | Spring AI 2.0.1 + `@Tool` + MCP |
 | mate-test-starter | Testcontainers + `@MateTest` / `@MateIntegrationTest` |
 
 ## 引入方式

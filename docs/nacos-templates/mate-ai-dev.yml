@@ -12,12 +12,12 @@
 
 # ---- Spring AI provider selection ---------------------------
 # mate-ai-starter ships with Anthropic as the default, plus
-# optional openai / zhipuai / minimax / deepseek / ollama on
+# optional openai / deepseek / ollama on
 # the classpath. Pick ONE active chat model — Spring AI auto-
 # configures a ChatClient.Builder against it.
 spring:
   ai:
-    # Switch this to: anthropic | openai | zhipuai | minimax | deepseek | ollama
+    # Switch this to: anthropic | openai | deepseek | ollama
     model:
       chat: anthropic
 
@@ -26,26 +26,31 @@ spring:
       # The real key — DO NOT commit. Set via env in CI/CD.
       api-key: ${ANTHROPIC_API_KEY:}
       chat:
-        options:
-          model: claude-sonnet-4-6
-          temperature: 0.3
-          max-tokens: 4096
+        model: claude-sonnet-4-6
+        temperature: 0.3
+        max-tokens: 4096
 
     # ---- OpenAI (uncomment if model.chat=openai) ----
     # openai:
     #   api-key: ${OPENAI_API_KEY:}
     #   base-url: https://api.openai.com
     #   chat:
-    #     options:
-    #       model: gpt-5.5
-    #       temperature: 0.3
+    #     model: gpt-5.5
+    #     temperature: 0.3
 
     # ---- DeepSeek (uncomment if model.chat=deepseek) ----
     # deepseek:
     #   api-key: ${DEEPSEEK_API_KEY:}
     #   chat:
-    #     options:
-    #       model: deepseek-v4
+    #     model: deepseek-v4
+
+    # ---- Zhipu GLM (use model.chat=openai) ----
+    # OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+    # OPENAI_MODEL=glm-5
+
+    # ---- MiniMax (use model.chat=anthropic) ----
+    # ANTHROPIC_BASE_URL=https://api.minimax.io/anthropic
+    # ANTHROPIC_MODEL=MiniMax-M2.7
 
 # ---- mate-ai-starter behavior toggles -----------------------
 mate:

@@ -4,7 +4,7 @@ layout: home
 hero:
   name: MateCloud
   text: AI 原生的云原生微服务脚手架
-  tagline: DDD 工程底座 · Spring Boot 4 / Spring Cloud 2025 / Dubbo 3 / Spring AI 2.0 —— 即插即用 Starter、MCP 原生工程闭环（Loop Engineering），单体与微服务双形态一键交付。
+  tagline: DDD 工程底座 · Spring Boot 4 / Spring Cloud 2025 / Dubbo 3 / Spring AI 2.0.1 —— 即插即用 Starter、MCP 原生工程闭环（Loop Engineering），单体与微服务双形态一键交付。
   actions:
     - theme: brand
       text: 快速开始
@@ -37,7 +37,7 @@ features:
       width: 24
       height: 24
     title: AI 原生集成
-    details: Spring AI 2.0 · @Tool 自动发现 · 6 个 LLM 提供商 · 会话记忆 · 流式对话，领域方法一键成为 AI 可调用工具
+    details: Spring AI 2.0.1 · @Tool 自动发现 · 4 个原生 Provider 与兼容端点 · 会话记忆 · 流式对话，领域方法一键成为 AI 可调用工具
   - icon:
       src: /feature/loop.svg
       width: 24

@@ -28,7 +28,7 @@ import vip.mate.starter.ai.chat.AiChatService;
 import vip.mate.starter.ai.config.AiProperties;
 
 /**
- * Conversational AI endpoints powered by Spring AI 2.0.
+ * Conversational AI endpoints powered by Spring AI 2.0.1.
  *
  * <ul>
  *   <li>{@code POST /api/v1/ai/chat}        — blocking chat (Result&lt;String&gt;)</li>

@@ -1,6 +1,6 @@
 # AI 集成
 
-MateCloud 通过 `mate-ai-starter`（位于 `mate-starters-contrib`）提供原生 AI 集成，基于 Spring AI 2.0。
+MateCloud 通过 `mate-ai-starter`（位于 `mate-starters-contrib`）提供原生 AI 集成，基于 Spring AI 2.0.1。
 
 ## 三大能力
 
@@ -31,10 +31,10 @@ public class DictAiTools {
 | 提供商 | 环境变量 | 说明 |
 |--------|---------|------|
 | Anthropic（默认） | `ANTHROPIC_API_KEY` | Claude |
-| 智谱 GLM | `ZHIPUAI_API_KEY` + `MATE_AI_PROVIDER=zhipuai` | GLM-4-Plus |
+| 智谱 GLM | `OPENAI_API_KEY` + `MATE_AI_PROVIDER=openai` + 兼容端点 | GLM |
 | DeepSeek | `DEEPSEEK_API_KEY` + `MATE_AI_PROVIDER=deepseek` | DeepSeek |
 | OpenAI 兼容 | `OPENAI_API_KEY` + `OPENAI_BASE_URL` | Kimi / Moonshot 等 |
-| Minimax | `MINIMAX_API_KEY` + `MATE_AI_PROVIDER=minimax` | |
+| MiniMax | `ANTHROPIC_API_KEY` + `MATE_AI_PROVIDER=anthropic` + 兼容端点 | MiniMax M2.x |
 | Ollama | `OLLAMA_BASE_URL` + `MATE_AI_PROVIDER=ollama` | 本地部署 |
 
 ### 3. MCP Server 桥接
@@ -53,7 +53,7 @@ public class DictAiTools {
 
 ## 会话记忆
 
-`AiChatService` 通过 Spring AI 2.0 的 Advisor 链支持多轮对话：
+`AiChatService` 通过 Spring AI 2.0.1 的 Advisor 链支持多轮对话：
 
 ```json
 POST /api/v1/ai/chat

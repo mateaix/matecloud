@@ -1,6 +1,7 @@
 # LLM 提供商
 
-MateCloud 内置 6 个 LLM 提供商，通过环境变量切换。
+MateCloud 内置 Anthropic、OpenAI、DeepSeek、Ollama 四个 Spring AI provider，
+智谱 GLM 和 MiniMax 分别通过 OpenAI、Anthropic 兼容端点接入。
 
 ## Anthropic Claude（默认）
 
@@ -8,11 +9,13 @@ MateCloud 内置 6 个 LLM 提供商，通过环境变量切换。
 export ANTHROPIC_API_KEY=sk-ant-xxx
 ```
 
-## 智谱 GLM
+## 智谱 GLM（OpenAI 兼容）
 
 ```bash
-export MATE_AI_PROVIDER=zhipuai
-export ZHIPUAI_API_KEY=your-key
+export MATE_AI_PROVIDER=openai
+export OPENAI_API_KEY=your-key
+export OPENAI_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+export OPENAI_MODEL=glm-5
 ```
 
 ## DeepSeek
@@ -31,11 +34,13 @@ export OPENAI_BASE_URL=https://api.moonshot.cn
 export OPENAI_MODEL=moonshot-v1-32k
 ```
 
-## Minimax
+## MiniMax（Anthropic 兼容）
 
 ```bash
-export MATE_AI_PROVIDER=minimax
-export MINIMAX_API_KEY=your-key
+export MATE_AI_PROVIDER=anthropic
+export ANTHROPIC_API_KEY=your-key
+export ANTHROPIC_BASE_URL=https://api.minimax.io/anthropic
+export ANTHROPIC_MODEL=MiniMax-M2.7
 ```
 
 ## Ollama（本地部署）

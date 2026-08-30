@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.7</version>
+        <version>4.0.8</version>
         <relativePath/>
     </parent>
 
@@ -61,7 +61,7 @@
         <matecloud.version>5.0.8</matecloud.version>
 
         <!-- Spring Ecosystem -->
-        <spring-boot.version>4.0.7</spring-boot.version>
+        <spring-boot.version>4.0.8</spring-boot.version>
         <spring-cloud.version>2025.1.2</spring-cloud.version>
         <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
         <!-- Nacos client 单独升级:对齐 nacos-server 3.2.1(spring-cloud-alibaba BOM 默认 3.1.1)。
@@ -113,11 +113,11 @@
         <logstash-logback.version>9.0</logstash-logback.version>
 
         <!-- Spring AI (targets Spring Boot 4.x) -->
-        <spring-ai.version>2.0.0</spring-ai.version>
+        <spring-ai.version>2.0.1</spring-ai.version>
 
         <!-- Build Plugin Versions -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <spring-boot-maven-plugin.version>3.5.6</spring-boot-maven-plugin.version>
+        <spring-boot-maven-plugin.version>${spring-boot.version}</spring-boot-maven-plugin.version>
         <smart-doc-maven-plugin.version>3.0.9</smart-doc-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
     </properties>
@@ -125,7 +125,7 @@
     <dependencyManagement>
         <dependencies>
             <!-- ==================== BOM Imports ==================== -->
-            <!-- Spring Boot first to ensure Spring Framework 6.x wins -->
+            <!-- Spring Boot first to ensure its Spring Framework 7.x baseline wins -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -539,13 +539,6 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <excludes>
                             <exclude>
