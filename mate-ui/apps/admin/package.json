@@ -25,7 +25,7 @@
     "echarts": "^5.5.1",
     "element-plus": "^2.13.7",
     "lucide-vue-next": "^0.468.0",
-    "pdfjs-dist": "^4.7.76",
+    "pdfjs-dist": "^6.1.200",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.0.0",
     "vue": "^3.5.32",
