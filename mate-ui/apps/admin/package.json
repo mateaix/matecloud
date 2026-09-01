@@ -22,7 +22,7 @@
     "@vue-flow/minimap": "^1.5.4",
     "@vueuse/core": "^12.0.0",
     "axios": "^1.7.0",
-    "echarts": "^5.5.1",
+    "echarts": "^6.1.0",
     "element-plus": "^2.13.7",
     "lucide-vue-next": "^0.468.0",
     "pdfjs-dist": "^4.7.76",
