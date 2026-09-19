@@ -95,7 +95,7 @@
         <lombok.version>1.18.36</lombok.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <hutool.version>5.8.35</hutool.version>
-        <bouncycastle.version>1.84</bouncycastle.version>
+        <bouncycastle.version>1.85</bouncycastle.version>
         <zxing.version>3.5.3</zxing.version>
         <lark-oapi.version>2.7.1</lark-oapi.version>
         <guava.version>33.6.0-jre</guava.version>
