@@ -132,12 +132,15 @@ public class TenantAutoConfiguration {
      * header so downstream servlet services pick it up via their web filter.
      * Only wires up in a reactive (gateway) application.
      */
-    @Bean
-    @ConditionalOnMissingBean(TenantGatewayFilter.class)
+    @org.springframework.context.annotation.Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(name = "org.springframework.cloud.gateway.filter.GlobalFilter")
     @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
-    public TenantGatewayFilter tenantGatewayFilter(TenantProperties properties) {
-        return new TenantGatewayFilter(properties);
+    static class GatewayConfiguration {
+        @Bean
+        @ConditionalOnMissingBean(TenantGatewayFilter.class)
+        TenantGatewayFilter tenantGatewayFilter(TenantProperties properties) {
+            return new TenantGatewayFilter(properties);
+        }
     }
 
     @Bean("tenantCacheKeyGenerator")

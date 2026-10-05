@@ -72,9 +72,9 @@
         <dubbo.version>3.3.6</dubbo.version>
 
         <!-- ORM -->
-        <mybatis-plus.version>3.5.16</mybatis-plus.version>
-        <mybatis-plus-generator.version>3.5.16</mybatis-plus-generator.version>
-        <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
+        <mybatis-plus.version>3.5.17</mybatis-plus.version>
+        <mybatis-plus-generator.version>${mybatis-plus.version}</mybatis-plus-generator.version>
+        <dynamic-datasource.version>4.5.0</dynamic-datasource.version>
 
         <!-- Database -->
         <mysql.version>8.3.0</mysql.version>
@@ -348,7 +348,7 @@
             <!-- MyBatis Plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <dependency>
@@ -368,7 +368,7 @@
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <artifactId>dynamic-datasource-spring-boot4-starter</artifactId>
                 <version>${dynamic-datasource.version}</version>
             </dependency>
 
@@ -380,7 +380,7 @@
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
             <dependency>
@@ -574,6 +574,13 @@
                 <executions>
                     <execution>
                         <id>jacoco-prepare-agent</id>
+                        <configuration>
+                            <!-- Collect project coverage only; generated SQL parser methods
+                                 can exceed the JVM method-size limit after instrumentation. -->
+                            <includes>
+                                <include>vip.mate.*</include>
+                            </includes>
+                        </configuration>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>

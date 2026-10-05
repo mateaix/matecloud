@@ -17,19 +17,13 @@ package vip.mate.starter.ds.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.annotation.FieldStrategy;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.core.MybatisConfiguration;
-import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.JdbcType;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;
 import org.mybatis.spring.annotation.MapperScan;
@@ -43,7 +37,6 @@ import org.springframework.boot.flyway.autoconfigure.FlywayMigrationStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -61,14 +54,9 @@ import java.util.Map;
 /**
  * Auto-configuration for DataSource and MyBatis Plus.
  *
- * <p>MyBatis-Plus 3.5.16 auto-config references Spring Boot 3.x's
- * DataSourceAutoConfiguration (Boot 4.x has migrated), so we must
- * manually create SqlSessionFactory and wire GlobalConfig + MetaObjectHandler.
- *
- * <p>Druid's own auto-config ({@code DruidDataSourceAutoConfigure}) also
- * references the old Boot 3.x class and is excluded globally in
- * mate-defaults.yml. We create the DruidDataSource bean here instead,
- * bound to standard {@code spring.datasource.*} properties.</p>
+ * <p>The official MyBatis-Plus Boot 4 starter owns SqlSessionFactory and
+ * binds mybatis-plus properties. This configuration contributes the Druid
+ * datasource, mapper scanning, interceptor chain and field-fill handler.</p>
  *
  * @author mateaix
  */
@@ -77,8 +65,11 @@ import java.util.Map;
 // bean (below) wins the @ConditionalOnMissingBean(DataSource) race — otherwise
 // Boot's DataSourceConfiguration.Generic builds a Druid from spring.datasource.type
 // but ignores the spring.datasource.druid.* pool/monitor tuning (stat/wall/slf4j).
-@AutoConfiguration(beforeName = "org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration")
-@ConditionalOnClass({SqlSessionFactory.class, MybatisSqlSessionFactoryBean.class})
+@AutoConfiguration(beforeName = {
+        "org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration",
+        "com.baomidou.mybatisplus.autoconfigure.MybatisPlusInnerInterceptorAutoConfiguration",
+        "com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration"})
+@ConditionalOnClass(SqlSessionFactory.class)
 // One glob: "vip.mate.**.dao" already matches any package ending in `.dao` at any
 // depth (incl. `…infrastructure.dao`), so a second `…infrastructure.dao` pattern
 // only made MyBatis scan every mapper twice (harmless but ~20 "Skipping
@@ -97,7 +88,7 @@ public class DataSourceAutoConfiguration {
 
     /**
      * Create a single Druid DataSource bound to spring.datasource.* properties.
-     * Replaces the excluded DruidDataSourceAutoConfigure.
+     * Uses the Druid core library without a second datasource auto-configuration.
      *
      * <p>Backs off when baomidou dynamic-datasource is enabled
      * ({@code spring.datasource.dynamic.enabled=true}), in which case
@@ -120,50 +111,6 @@ public class DataSourceAutoConfiguration {
         ds.setDriverClassName(env.getProperty("spring.datasource.driver-class-name",
                 "com.mysql.cj.jdbc.Driver"));
         return ds;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource,
-                                               MybatisPlusInterceptor mybatisPlusInterceptor,
-                                               MetaObjectHandler metaObjectHandler) throws Exception {
-        MybatisSqlSessionFactoryBean factory = new MybatisSqlSessionFactoryBean();
-        factory.setDataSource(dataSource);
-        factory.setMapperLocations(
-                new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/**/*.xml"));
-
-        // MybatisConfiguration — mirrors mybatis-plus.configuration in mate-defaults.yml
-        MybatisConfiguration configuration = new MybatisConfiguration();
-        configuration.setMapUnderscoreToCamelCase(true);
-        configuration.setCacheEnabled(false);
-        configuration.setCallSettersOnNulls(true);
-        configuration.setJdbcTypeForNull(JdbcType.NULL);
-        factory.setConfiguration(configuration);
-
-        factory.setPlugins(mybatisPlusInterceptor);
-        // No typeAliasesPackage: MyBatis-Plus resolves entities by their Class via
-        // BaseMapper<T>, and the project ships no XML mappers (so no short resultType
-        // aliases are consumed). Registering aliases by simple name would also throw on
-        // duplicates across modules in monolith mode (e.g. auth + system LoginLogPO).
-
-        // GlobalConfig — mirrors mybatis-plus.global-config in mate-defaults.yml
-        GlobalConfig globalConfig = new GlobalConfig();
-        globalConfig.setBanner(false);
-        globalConfig.setMetaObjectHandler(metaObjectHandler);
-
-        GlobalConfig.DbConfig dbConfig = new GlobalConfig.DbConfig();
-        dbConfig.setIdType(IdType.ASSIGN_ID);
-        dbConfig.setLogicDeleteField("deleted");
-        dbConfig.setLogicDeleteValue("1");
-        dbConfig.setLogicNotDeleteValue("0");
-        dbConfig.setInsertStrategy(FieldStrategy.NOT_NULL);
-        dbConfig.setUpdateStrategy(FieldStrategy.NOT_NULL);
-        dbConfig.setTableUnderline(true);
-        globalConfig.setDbConfig(dbConfig);
-
-        factory.setGlobalConfig(globalConfig);
-
-        return factory.getObject();
     }
 
     /**

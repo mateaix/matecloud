@@ -1,8 +1,8 @@
 package vip.mate.starter.security.encrypt;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.TypeHandler;
 import org.springframework.core.env.Environment;
 
 import javax.crypto.Cipher;
@@ -39,7 +39,7 @@ import java.util.Base64;
  * @author mateaix
  */
 @Slf4j
-public class EncryptTypeHandler extends BaseTypeHandler<String> {
+public class EncryptTypeHandler implements TypeHandler<String> {
 
     private static final String ALGORITHM = "AES/CBC/PKCS5Padding";
     private static final String KEY_ALGORITHM = "AES";
@@ -53,9 +53,42 @@ public class EncryptTypeHandler extends BaseTypeHandler<String> {
         this.environment = environment;
     }
 
-    // ---- write -----------------------------------------------------------
+    /**
+     * Register this bean by handler class only. The official Boot starter
+     * discovers all TypeHandler beans; inferring String here would make every
+     * String parameter (including IDs and usernames) encrypted by default.
+     * Explicit @TableField(typeHandler=...) mappings still resolve this instance.
+     */
+    @Override
+    public void setParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType)
+            throws SQLException {
+        if (parameter == null) {
+            if (jdbcType == null) {
+                throw new SQLException("JDBC type is required for a null encrypted parameter");
+            }
+            ps.setNull(i, jdbcType.TYPE_CODE);
+        } else {
+            setNonNullParameter(ps, i, parameter, jdbcType);
+        }
+    }
 
     @Override
+    public String getResult(ResultSet rs, String columnName) throws SQLException {
+        return getNullableResult(rs, columnName);
+    }
+
+    @Override
+    public String getResult(ResultSet rs, int columnIndex) throws SQLException {
+        return getNullableResult(rs, columnIndex);
+    }
+
+    @Override
+    public String getResult(CallableStatement cs, int columnIndex) throws SQLException {
+        return getNullableResult(cs, columnIndex);
+    }
+
+    // ---- write -----------------------------------------------------------
+
     public void setNonNullParameter(PreparedStatement ps, int i,
                                      String parameter, JdbcType jdbcType) throws SQLException {
         try {
@@ -68,17 +101,14 @@ public class EncryptTypeHandler extends BaseTypeHandler<String> {
 
     // ---- read ------------------------------------------------------------
 
-    @Override
     public String getNullableResult(ResultSet rs, String columnName) throws SQLException {
         return decryptSafe(rs.getString(columnName));
     }
 
-    @Override
     public String getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         return decryptSafe(rs.getString(columnIndex));
     }
 
-    @Override
     public String getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         return decryptSafe(cs.getString(columnIndex));
     }

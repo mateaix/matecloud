@@ -19,6 +19,15 @@
 
 ## Starter 1: mate-ds-starter
 
+2026-10-05 升级状态：MyBatis-Plus 使用官方 Boot 4 starter 3.5.17，
+动态数据源使用 Boot 4 starter 4.5.0。SqlSessionFactory、SqlSessionTemplate 与
+mybatis-plus 属性绑定由官方自动配置负责；MateCloud 保留全限定 Mapper 名称、
+拦截器顺序、字段填充和 Flyway 策略。Druid 使用核心库并由 MateCloud 创建和绑定数据源。
+全局 type-aliases-package 已取消，避免单体模式同名 PO 冲突。
+EncryptTypeHandler 仅按处理器类注册，继续用于显式字段映射，不接管普通 String。
+H2 回归覆盖单/动态数据源、CRUD、分页、逻辑删除、配置覆盖，以及单体 Mapper
+扫描、多租户拦截器顺序和字段加密。外部 MySQL / Nacos / Redis 联调单独执行。
+
 ### 1.1 pom.xml
 
 Create `D:\codes\matecloud\mate-starters\mate-ds-starter\pom.xml`
@@ -58,7 +67,7 @@ Create `D:\codes\matecloud\mate-starters\mate-ds-starter\pom.xml`
         <!-- MyBatis Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
         </dependency>
 
         <!-- MySQL Driver -->
@@ -71,13 +80,13 @@ Create `D:\codes\matecloud\mate-starters\mate-ds-starter\pom.xml`
         <!-- Druid Connection Pool -->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-3-starter</artifactId>
+            <artifactId>druid</artifactId>
         </dependency>
 
         <!-- Dynamic DataSource (optional, for multi-datasource) -->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+            <artifactId>dynamic-datasource-spring-boot4-starter</artifactId>
             <optional>true</optional>
         </dependency>
 

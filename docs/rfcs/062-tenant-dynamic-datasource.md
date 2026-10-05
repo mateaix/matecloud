@@ -481,7 +481,7 @@ public TenantDataSourceRegistry tenantDataSourceRegistry(
   joolun 的 `DefaultDataSourceCreator` 只塞了 `HikariDataSourceCreator`。
   本 RFC 落地时**必须确认 per-tenant 池用 Druid `DataSourceCreator`**（保持与主库一致的监控/慢 SQL），
   并把 `perPoolMaxActive/minIdle` 映射到 Druid 的 `maxActive/minIdle`（非 Hikari 的 `maximumPoolSize`）。
-  依赖：`dynamic-datasource-spring-boot3-starter` + druid creator 在 classpath。
+  依赖：`dynamic-datasource-spring-boot4-starter:4.5.0` + druid creator 在 classpath。
 - **GAP-2 已并入 GAP-A**（探活泄漏）。
 - **GAP-3 master 数据源的完整配置缺失**：前文 §4.1 只给了租户 template，没给 `master`。
   `dynamic.enabled=true` 时 mate-ds-starter 的单 Druid bean 退避、`DynamicRoutingDataSource` 接管，

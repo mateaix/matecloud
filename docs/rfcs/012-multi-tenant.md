@@ -1715,7 +1715,7 @@ per-tenant DB provisioning is deferred** (operator configures datasources
 statically for now).
 
 1. **Dependency** — `mate-tenant-starter` pulls
-   `com.baomidou:dynamic-datasource-spring-boot3-starter`. It is dormant unless
+   `com.baomidou:dynamic-datasource-spring-boot4-starter:4.5.0`. It is dormant unless
    `spring.datasource.dynamic.enabled=true`.
 2. **Datasource coexistence** — `mate-ds-starter`'s single Druid datasource is
    gated by `@ConditionalOnProperty("spring.datasource.dynamic.enabled"=false,

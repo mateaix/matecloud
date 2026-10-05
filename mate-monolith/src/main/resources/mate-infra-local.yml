@@ -16,10 +16,7 @@ spring:
   # ---- Deployment mode: monolith ----
   autoconfigure:
     exclude:
-      # The first two mirror mate-defaults.yml (this list REPLACES it, so they
-      # must be repeated): Druid/Redisson Boot-3 auto-configs reference classes
-      # moved in Boot 4 — the ds-/cache-starters wire those beans manually.
-      - com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure
+      # Mirror the cache exclusion from mate-defaults.yml (this list replaces it).
       - org.redisson.spring.starter.RedissonAutoConfigurationV2
       # mate-auth self-configures the behaviour captcha; avoid double-registration.
       - com.xingyuv.captcha.config.AjCaptchaAutoConfiguration

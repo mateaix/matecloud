@@ -27,7 +27,6 @@ spring:
       # ── Boot 3.x auto-configs incompatible with Boot 4.x ──
       # These starters reference classes that moved packages in Boot 4.x.
       # Exclude their auto-config and let mate-starters handle it manually.
-      - com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceAutoConfigure
       - org.redisson.spring.starter.RedissonAutoConfigurationV2
   threads:
     virtual:
@@ -207,7 +206,7 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
   mapper-locations: classpath*:mapper/**/*.xml
-  type-aliases-package: vip.mate.**.infrastructure.dao.po
+  # No global aliases: same-named POs from different services coexist in monolith mode.
 
 # ============================================================
 # Sa-Token — framework defaults
